@@ -1,6 +1,6 @@
 # ring.middleware.clojurescript
 
-ALPHA
+BETA
 
 Wraps requests such that ClojureScript is conditionally (re)compiled before being served.
 
