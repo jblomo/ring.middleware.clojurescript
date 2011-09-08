@@ -3,17 +3,22 @@
   (:require [cljs.closure :as cljsc])
   (:import java.io.File))
 
+(defn- path-str
+  ([basename] (str (File. basename)))
+  ([dirname basename] (str (File. dirname basename))))
+
+(defn- cljsc-output-options [dest-root dest-file]
+  {:output-dir (path-str dest-root)
+   :output-to (path-str dest-root dest-file)})
+
 (defn wrap-clojurescript
-  "Wrap an app such that out-of-date ClojureScript will be compiled and placed
-  into the root-path.  Typically this is used to wrap routes that serve the
-  compiled javascript."
-  [app ^String root-path & [opts]]
-  (let [opts (merge
-               {:cljs-path (str (File. root-path "src"))
-                :cljsc-options {;:optimizations :simple
-                                :output-dir (str (File. root-path "out"))
-                                :output-to (str (File. root-path "bootstrap.js"))}}
-               opts)]
+  "Wrap an app such that out-of-date ClojureScript in src-root will be compiled
+   and placed into dest-root. Typically this is used to wrap routes that serve
+   the compiled javascript."
+  [app src-root dest-root dest-file & [opts]]
+  (let [opts (merge {:cljs-path (path-str src-root)
+                     :cljsc-options (cljsc-output-options dest-root dest-file)}
+                    opts)]
     (fn [req]
       (let [src-paths (file-seq (File. (:cljs-path opts)))
             out-dir (File. (get-in opts [:cljsc-options :output-dir]))
