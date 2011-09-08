@@ -10,7 +10,7 @@ If you have ClojureScript source code in `cljs/src/` and your HTML is including 
 
     (use 'ring.middleware.clojurescript)
     (defn app [req] ...)
-	(def cljsc-app (wrap-clojurscript app "cljs"))
+	(def cljsc-app (wrap-clojurescript app "cljs"))
 
 
 ## License
