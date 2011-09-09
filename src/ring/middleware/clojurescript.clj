@@ -20,8 +20,8 @@
 (defn wrap-clojurescript
   "Wrap an app such that out-of-date ClojureScript will be compiled.
   
-  Use opts to override any of the default paths below and supply additional
-  options to cljs/build.
+  Use opts to override any of the default below and supply additional options to
+  cljs/build.  By default, no Closure optimizations are used.
 
   :source-dir root-path/src
   :output-dir root-path/out
