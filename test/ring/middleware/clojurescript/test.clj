@@ -5,8 +5,8 @@
             [clojure.java.io :as io])
   (:import [java.io File]))
 
-(def bootstrap-js (File. "cljs/bootstrap.js"))
-(def base-js (File. "cljs/out/goog/base.js"))
+(def bootstrap-js (File. "cljs" "bootstrap.js"))
+(def base-js (File. "cljs/out/goog" "base.js"))
 
 (def app (-> (constantly :response)
            (rfile/wrap-file "cljs")
@@ -36,3 +36,17 @@
           (app {:request-method :get :uri "/bootstrap.js" :headers {}})]
       (is (< pre-timestamp (.lastModified body))))))
 
+
+(def alt-bootstrap (File. "cljs" "myapp.js"))
+
+(def alt-app (-> (constantly :response)
+               (rfile/wrap-file "cljs")
+               (wrap-clojurescript "cljs" {:output-dir (str (File. "cljs" "alt"))
+                                           :output-to (str alt-bootstrap)})))
+
+(deftest test-options
+  (let [{:keys [status headers body]}
+         (alt-app {:request-method :get :uri "/myapp.js" :headers {}})]
+    (is (= 200 status))
+    (is (= {} headers))
+    (is (= alt-bootstrap body))))

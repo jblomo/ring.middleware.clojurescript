@@ -12,6 +12,11 @@ If you have ClojureScript source code in `cljs/src/` and your HTML is including 
     (defn app [req] ...)
 	(def cljsc-app (wrap-clojurescript app "cljs"))
 
+Optionally, you can use the options dictionary to override those path defaults,
+as well as provide extra arguements to the ClojureScript compiler:
+
+    (wrap-clojurescript app "cljs" {:output-to "resources/js/myapp.js"
+                                    :optimizations :advanced})
 
 ## License
 
