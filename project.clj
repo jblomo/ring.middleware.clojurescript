@@ -1,4 +1,4 @@
-(defproject ring.middleware.clojurescript "0.3.0-SNAPSHOT"
+(defproject ring.middleware.clojurescript "0.4.0-SNAPSHOT"
   :description "Ring middleware that compiles ClojureScript and serves javascript"
   :dependencies [[org.clojure/clojure "1.3.0-beta3"]
                  [cljs-compiler-jar "0.1.0-SNAPSHOT"]
