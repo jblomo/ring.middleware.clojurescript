@@ -41,3 +41,17 @@
           (cljsc/build (:source-dir opts) opts))
 
         (app req)))))
+
+(defn -main
+  "Convinience function for compiling ClojureScript on the command line.
+
+  This function logically takes the same arguements as wrap-clojurescript, but
+  without `app` and all options are considered strings from the command line.
+
+  lein run -m ring.middleware.clojurescript 'cljs' '{:optimizations :advanced}'"
+  [^String root-path & [string-opts]]
+  (let [opts (load-string string-opts)
+        fake-app (constantly "Complete")
+        compiler (wrap-clojurescript fake-app root-path opts)]
+    (compiler {})))
+    
