@@ -50,7 +50,7 @@
 
   lein run -m ring.middleware.clojurescript 'cljs' '{:optimizations :advanced}'"
   [^String root-path & [string-opts]]
-  (let [opts (load-string string-opts)
+  (let [opts (when string-opts (load-string string-opts))
         fake-app (constantly "Complete")
         compiler (wrap-clojurescript fake-app root-path opts)]
     (compiler {})))
