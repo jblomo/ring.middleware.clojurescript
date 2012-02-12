@@ -1,6 +1,5 @@
-(defproject ring.middleware.clojurescript "0.5.0-SNAPSHOT"
+(defproject ring.middleware.clojurescript "0.5.0"
   :description "Ring middleware that compiles ClojureScript and serves javascript"
-  :dependencies [[org.clojure/clojure "1.3.0-beta3"]
-                 [cljs-compiler-jar "0.1.0-SNAPSHOT"]
-                 [goog-jar "1.0.0"]]
-  :dev-dependencies [[ring/ring-core "0.3.11" :exclusions [org.clojure/clojure org.clojure/clojure-contrib]]])
+  :dependencies [[org.clojure/clojure "1.3.0"]
+                 [org.clojure/clojurescript "0.0-971"]]
+  :dev-dependencies [[ring/ring-core "1.0.2" :exclusions [org.clojure/clojure org.clojure/clojure-contrib]]])
